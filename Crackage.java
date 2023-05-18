@@ -1,4 +1,4 @@
 public abstract class Crackage {
-    public abstract void crackerSimplePassword(String motDePasse);
-    public abstract String crackerHashedPassword(String motDePasse);
+    public abstract String crackerSimplePassword(String motDePasse);
+    public abstract String crackerHashedPassword(String motDePasse, int initalLength);
 }
