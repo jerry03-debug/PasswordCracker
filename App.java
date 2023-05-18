@@ -3,8 +3,8 @@ public class App{
         String methodeDeCrackage = "bruteforce";
         Crackage cracker = CrackageFactory.createPasswordCracker(methodeDeCrackage);
 
-        cracker.hasherMotDePasse("password123");
-        cracker.crackerMotDePasse("hashedPassword");
+        cracker.crackerSimplePassword("password123");
+        cracker.crackerHashedPassword("hashedPassword");
         
     }
 }
