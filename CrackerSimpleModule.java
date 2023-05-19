@@ -12,9 +12,8 @@ public class CrackerSimpleModule {
         String returnedPassword;
 
         // Scanner in = new Scanner(System.in);
+        System.out.println("Vous voulez nous defier!\nOn peut craquer ton mot de passe simple de deux facons : ");
         String methode = getMethodeCrackaque(in);
-        System.out.println("Vous voulez nous defier!\nOn peut craquer ton mot de passe simple de deux facon yaay xool : ");
-
 
 
         Cracker cracker = CrackageFactory.createPasswordCracker(methode);
@@ -22,7 +21,7 @@ public class CrackerSimpleModule {
         if(returnedPassword == null){
             System.out.println("Bravo mec ! Nous n'avons pu cracker ton mot de passe");
         }else{
-            System.out.println("mot de passe cracke. le mot de passe est : "+returnedPassword);
+            System.out.println("Mot de passe cracke. le mot de passe est : "+returnedPassword);
         }
         
         
@@ -39,7 +38,7 @@ public class CrackerSimpleModule {
             System.out.print("Fais ton choix : ");
             methodeDeCraquage = in.nextLine();
             if(!(methodeDeCraquage.equalsIgnoreCase("bruteforce") || methodeDeCraquage.equalsIgnoreCase("dictionary"))){
-                System.out.print("Mec yaw tamitt, faut être sérieux!\nJ'ai écris blanc sur noir 'bruteforce' ou 'dictionary'");
+                System.out.print("Tu nous fais quoi là?\nbruteforce ou dictionary");
             }else 
                 bon = true;
         }

@@ -40,7 +40,7 @@ public class Menu {
 
         
             default:
-                System.out.println("Mais mec ! A un moment donné, il faut être sérieux quoi\nJ'ai écris blan sur noir 1, 2 ou 3 et tu ose écrire "+choice);
+                System.out.println("J'ai écris blanc sur noir 1, 2 ou 3 et tu ose écrire "+choice);
                 break;
         }
 

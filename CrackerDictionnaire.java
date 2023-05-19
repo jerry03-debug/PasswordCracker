@@ -10,7 +10,13 @@ public class CrackerDictionnaire extends Cracker {
 
 
         String returnedPassword;
+        long debut = System.currentTimeMillis();
+
         returnedPassword = parDictionnaire(password, true);
+        long fin = System.currentTimeMillis();
+        long tempsEcoule = (fin - debut)/(1000);
+
+        System.out.println("temps ecoule : "+tempsEcoule+"s");
         return returnedPassword;
 
         
@@ -35,7 +41,7 @@ public class CrackerDictionnaire extends Cracker {
         return returnedPassword;
     }
 
-    public String parDictionnaire(StringBuilder passWorld, boolean isSimple){
+    public String parDictionnaire(StringBuilder password, boolean isSimple){
         try {
             File file = new File("../password-bib/french_passwords_top20000.txt");
             FileReader fileReader = new FileReader(file);
@@ -44,7 +50,7 @@ public class CrackerDictionnaire extends Cracker {
             String line;
             while((line = bufferedReader.readLine()) != null)
             {
-                if(MdService.mdCompare(passWorld, line, isSimple)){
+                if(MdService.mdCompare(password, line, isSimple)){
                     // mot de passe trouvé
                     bufferedReader.close();
                     return line;

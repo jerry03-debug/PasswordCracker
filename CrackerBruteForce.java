@@ -9,8 +9,9 @@ public class CrackerBruteForce extends Cracker {
         long debut = System.currentTimeMillis();
 
         returnedPassword = forceBrute(password, passwordToGenerate, 0, password.length(), true);
+        
         long fin = System.currentTimeMillis();
-        long tempsEcoule = fin - debut;
+        long tempsEcoule = (fin - debut)/1000;
         System.out.println("temps ecoule : "+tempsEcoule+"s");
 
         return returnedPassword;
@@ -25,19 +26,28 @@ public class CrackerBruteForce extends Cracker {
         String returnedPassword;
 
         char[] passwordToGenerate = new char[initalLength];
+
+        long debut = System.currentTimeMillis();
+        
         returnedPassword = forceBrute(password, passwordToGenerate, 0, initalLength, false);
+        
+        long fin = System.currentTimeMillis();
+        long tempsEcoule = (fin - debut)/1000;
+        System.out.println("temps ecoule : "+tempsEcoule+"s");
+        
         return returnedPassword;
     }
 
     
-    public String forceBrute(StringBuilder passWorld, char[] chaine, int position, int longueur, boolean isSimple){
+    public String forceBrute(StringBuilder passWord, char[] chaine, int position, int longueur, boolean isSimple){
         
         if(position == longueur-1){
             // dernière position il faut faire la comparaison 
             for (int i = 97; i < 97+26; i++) {
                 chaine[position] = toChar(i);
                 String combinaision = new String(chaine);
-                if(MdService.mdCompare(passWorld, combinaision, isSimple)){
+                // 
+                if(MdService.mdCompare(passWord, combinaision, isSimple)){
                     return combinaision;
                 }
             }
@@ -47,7 +57,7 @@ public class CrackerBruteForce extends Cracker {
             // ce n'est pas le dernier niveau il faut descendre au dernier niveau
             for (int i = 97; i < 123; i++) {
                 chaine[position] = toChar(i);
-                if(forceBrute(passWorld, chaine, position +1,longueur, isSimple) != null){
+                if(forceBrute(passWord, chaine, position +1,longueur, isSimple) != null){
                     // on a une correspondance, il faut encore retourner
                     return new String(chaine);
                 }
