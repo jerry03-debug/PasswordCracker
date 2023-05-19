@@ -2,32 +2,46 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-public class CrackageDictionnaire extends Crackage {
+public class CrackerDictionnaire extends Cracker {
     
-    public String crackerSimplePassword(String password) {
+    public String crackerSimplePassword(StringBuilder password) {
         // Implémentation de la méthode de cassage de mot de passe par l'algorithme du dictionnaire
         System.out.println("Cracking password using dictionary attack...");
 
 
         String returnedPassword;
+        long debut = System.currentTimeMillis();
+
         returnedPassword = parDictionnaire(password, true);
+        long fin = System.currentTimeMillis();
+        long tempsEcoule = (fin - debut)/(1000);
+
+        System.out.println("temps ecoule : "+tempsEcoule+"s");
         return returnedPassword;
 
         
     }
 
     
-    public String crackerHashedPassword(String password, int initalLength) {
+    public String crackerHashedPassword(StringBuilder password, int initalLength) {
         // Implémentation spécifique de la méthode de hachage de mot de passe par l'algorithme du dictionnaire
         System.out.println("Hashing password using dictionary algorithm...");
 
 
         String returnedPassword;
+        long debut = System.currentTimeMillis();
+
         returnedPassword = parDictionnaire(password, false);
+
+        long fin = System.currentTimeMillis();
+        long tempsEcoule = (fin - debut)/(1000);
+
+        System.out.println("temps ecoule : "+tempsEcoule+"s");
+
         return returnedPassword;
     }
 
-    public String parDictionnaire(String passWorld, boolean isSimple){
+    public String parDictionnaire(StringBuilder password, boolean isSimple){
         try {
             File file = new File("../password-bib/french_passwords_top20000.txt");
             FileReader fileReader = new FileReader(file);
@@ -36,7 +50,7 @@ public class CrackageDictionnaire extends Crackage {
             String line;
             while((line = bufferedReader.readLine()) != null)
             {
-                if(MdService.mdCompare(passWorld, line, isSimple)){
+                if(MdService.mdCompare(password, line, isSimple)){
                     // mot de passe trouvé
                     bufferedReader.close();
                     return line;

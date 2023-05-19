@@ -3,11 +3,11 @@
 
 public class CrackageFactory {
 
-    public static Crackage createPasswordCracker(String methode) {
+    public static Cracker createPasswordCracker(String methode) {
         if (methode.equalsIgnoreCase("bruteforce")) {
-            return new CrackageBruteForce();
+            return new CrackerBruteForce();
         } else if (methode.equalsIgnoreCase("dictionary")) {
-            return new CrackageDictionnaire();
+            return new CrackerDictionnaire();
         } else {
             System.out.println("La methode de crackage"+methode+"est invalide");
         }

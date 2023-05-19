@@ -1,37 +1,53 @@
-public class CrackageBruteForce extends Crackage {
+public class CrackerBruteForce extends Cracker {
     
-    public String crackerSimplePassword(String password) {
+    public String crackerSimplePassword(StringBuilder password) {
         // Implémentation de la méthode de cassage de mot de passe par BruteForce
         System.out.println("Cracking password using bruteforce...");
 
         String returnedPassword;
         char[] passwordToGenerate = new char[password.length()];
+        long debut = System.currentTimeMillis();
+
         returnedPassword = forceBrute(password, passwordToGenerate, 0, password.length(), true);
+        
+        long fin = System.currentTimeMillis();
+        long tempsEcoule = (fin - debut)/1000;
+        System.out.println("temps ecoule : "+tempsEcoule+"s");
+
         return returnedPassword;
 
     }
 
     
-    public String crackerHashedPassword(String password, int initalLength) {
+    public String crackerHashedPassword(StringBuilder password, int initalLength) {
         // Implémentation de la méthode de hachage de mot de passe avec BruteForce
         System.out.println("Hashing password using bruteforce algorithm...");
         
         String returnedPassword;
 
         char[] passwordToGenerate = new char[initalLength];
+
+        long debut = System.currentTimeMillis();
+        
         returnedPassword = forceBrute(password, passwordToGenerate, 0, initalLength, false);
+        
+        long fin = System.currentTimeMillis();
+        long tempsEcoule = (fin - debut)/1000;
+        System.out.println("temps ecoule : "+tempsEcoule+"s");
+        
         return returnedPassword;
     }
 
     
-    public String forceBrute(String passWorld, char[] chaine, int position, int longueur, boolean isSimple){
+    public String forceBrute(StringBuilder passWord, char[] chaine, int position, int longueur, boolean isSimple){
         
         if(position == longueur-1){
             // dernière position il faut faire la comparaison 
             for (int i = 97; i < 97+26; i++) {
                 chaine[position] = toChar(i);
                 String combinaision = new String(chaine);
-                if(MdService.mdCompare(passWorld, combinaision, isSimple)){
+                // 
+                if(MdService.mdCompare(passWord, combinaision, isSimple)){
                     return combinaision;
                 }
             }
@@ -39,9 +55,9 @@ public class CrackageBruteForce extends Crackage {
 
         }else{
             // ce n'est pas le dernier niveau il faut descendre au dernier niveau
-            for (int i = 97; i < 97+26; i++) {
+            for (int i = 97; i < 123; i++) {
                 chaine[position] = toChar(i);
-                if(forceBrute(passWorld, chaine, position +1,longueur, isSimple) != null){
+                if(forceBrute(passWord, chaine, position +1,longueur, isSimple) != null){
                     // on a une correspondance, il faut encore retourner
                     return new String(chaine);
                 }
