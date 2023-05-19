@@ -48,7 +48,7 @@ public class MdService {
     }
 
 
-    public static boolean mdCompare(String password, String chaine, boolean isSimple){
+    public static boolean mdCompare(StringBuilder password, String chaine, boolean isSimple){
         boolean retour;
         if(isSimple){
             retour = mdSimpleCompare(password, chaine);
@@ -58,20 +58,18 @@ public class MdService {
 
         return retour;
     }
-    public static boolean mdSimpleCompare(String password, String chaine){
-        if(password.equalsIgnoreCase(chaine)){
+    public static boolean mdSimpleCompare(StringBuilder password, String chaine){
+        if(chaine.equals(password.toString())){
             return true;
         }
         return false;
     }
-    public static boolean mdHashedCompare(String password, String chaine){
+    public static boolean mdHashedCompare(StringBuilder password, String chaine){
         // il nous faut hasher la chaine et ensuite comparer
-        System.out.println("chaine genere : "+chaine);
         String[] algos = {"MD2", "MD5", "SHA-224", "SHA-1", "SHA-256", "SHA-384", "SHA-512/224", "SHA-512/256", "SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512"};
         for (int i = 0; i < algos.length; i++) {
             String chaineHashe = MdService.mdHasheur(algos[i], chaine);
-            System.out.println("hash de "+chaine+" par l'algo "+algos[i] + " est : "+chaineHashe);
-            if(password.equals(chaineHashe)){
+            if(chaineHashe.equals(password.toString())){
                 // mot de passe trouvé 
                 return true;
 
